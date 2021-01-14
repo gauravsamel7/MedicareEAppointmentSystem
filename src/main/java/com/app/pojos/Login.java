@@ -1,5 +1,6 @@
 package com.app.pojos;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +24,14 @@ public class Login {
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Role type;
+
+
+	 @OneToOne(mappedBy="loginId",cascade=CascadeType.ALL)
+	private Hospital currentHospital;
+	@OneToOne(mappedBy = "loginId", cascade = CascadeType.ALL)
+	private Doctor currentDoctor;
+	@OneToOne(mappedBy = "loginId", cascade = CascadeType.ALL)
+	private Patient currentPatient;
 
 	public Login() {
 		System.out.println("In Ctor Of :" + getClass().getName());
@@ -97,11 +107,4 @@ public class Login {
 
 
 
-//require uni one to one mapping 
-//	@OneToOne(mappedBy = "loginId", cascade = CascadeType.ALL)
-//	private Hospital currentHospital;
-//	@OneToOne(mappedBy = "loginId", cascade = CascadeType.ALL)
-//	private Doctor currentDoctor;
-//	@OneToOne(mappedBy = "loginId", cascade = CascadeType.ALL)
-//	private Patient currentPatient;
 
